@@ -260,7 +260,7 @@ void ReorderBuffer::Tick(int cycle) {
 
 
 void ReorderBuffer::InsertOutput(vector<string>& table) {
-	const int tableWidth = 80;
+	const int tableWidth = 113;
 	const int colWidth[] = { 10, 8, 20, 70}; // 各列宽度
 
 	// 打印表头

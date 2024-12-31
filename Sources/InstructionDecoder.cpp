@@ -311,7 +311,7 @@ void InstructionDecoder::ReceiveCommitSignal(string unitName, string commitMessa
 
 
 void InstructionDecoder::OutputInstructionTime() {
-	const int tableWidth = 85;
+	const int tableWidth = 86;
 	const int colWidth[] = { 20, 15, 15, 15, 15 };
 	printHeader("Instruction Complete Time", tableWidth);
 

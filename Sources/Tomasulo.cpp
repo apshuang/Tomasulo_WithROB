@@ -38,7 +38,7 @@ bool Tomasulo::Tick() {
 	
 	GetOutput();
 	if (CheckStop())return true;
-	cout << string(80, '-') << "\n\n\n";
+	cout << string(115, '-') << "\n\n\n";
 	return false;
 }
 
