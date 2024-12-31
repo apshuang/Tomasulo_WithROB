@@ -20,7 +20,7 @@ Sun Yat-Sen University 2024秋季学期 并行计算机体系结构大作业
 
 ### 基本架构
 * 本项目中包含register（整型和浮点型）、LoadBuffer、StoreBuffer、ReservationStation（包括adder和multiplier）、InstructionDecoder、CommonDataBus、ReorderBuffer以及一个Tomasulo类（用来将上述所有部件整合在一起）。
-* 其中InstructionDecoder负责将指令读取并解析，将指令发送到对应的保留站（包括load/store buffer），同时，它还负责branch指令的执行，只要两个操作数准备好了，他就可以进行比较，并决定是否跳转（在branch指令的操作数ready之前，必须阻塞在这里，不能issue后面的指令）
+* 其中InstructionDecoder负责将指令读取并解析，将指令发送到对应的保留站（包括load/store buffer），在遇到Branch指令的时候，它会默认跳转。
 * 其中load/store buffer和保留站，就是用来缓存指令的地方，它们在计算单元有空闲的时候，自动将指令发送到计算单元上进行计算（本项目没有抽象出这样一个类，而是直接通过模拟remainingTime来实现）。而在计算完毕之后，也由它们来将result发送到CDB上。
 * register和CDB会根据指令来设置自己的字面值，比如一条`fld f6,32(x2)`指令，此时就会让`f6`寄存器变成`Load1`，从而后续引用`f6`寄存器的值时，就会自动引用`Load1`。
 * ReorderBuffer会被动地接受instruction的issue（来自InstructionDecoder）、execute（来自load/store buffer和保留站通过CDB来发射signal）、WRITE（来自load/store buffer和保留站传送result时，顺便设置为WRITE状态），并会在每个周期主动地将所有最旧的未COMMIT的指令都进行COMMIT。
